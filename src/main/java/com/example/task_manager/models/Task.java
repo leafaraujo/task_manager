@@ -1,6 +1,6 @@
 package com.example.task_manager.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -19,14 +19,22 @@ public class Task implements Serializable {
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 500)
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String title;
 
     @Column(nullable = false)
     private String category;
+
+    @ManyToOne
+    @JoinColumn(name="id_setor")
+    private Department department;
+
+    @ManyToOne
+    @JoinColumn(name="id_funcionario")
+    private Employee employee;
 
     public long getId() {
         return id;

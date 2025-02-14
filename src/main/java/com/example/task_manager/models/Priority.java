@@ -5,7 +5,7 @@ public enum Priority {
     MEDIUM("Média"),
     HIGHER("Alta");
 
-    private String type;
+    private final String type;
 
     private Priority(String priority){
         this.type = priority;

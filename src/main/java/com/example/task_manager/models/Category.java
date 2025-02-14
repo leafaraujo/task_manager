@@ -1,6 +1,6 @@
 package com.example.task_manager.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -11,7 +11,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
-    @Column(name = "nome_categoria")
+    @Column(name = "nome_categoria", nullable = false, unique = true)
     private String categoryName;
 
     @ManyToOne

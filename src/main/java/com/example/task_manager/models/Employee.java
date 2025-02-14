@@ -1,11 +1,10 @@
 package com.example.task_manager.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-
-import com.example.task_manager.models.Department;
 
 @Entity
 @Table(name = "employee")
@@ -15,7 +14,7 @@ public class Employee implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, name = "name")
+    @Column(nullable = false, name = "name", length = 50)
     private String employeeName;
 
     @Column(nullable = false, unique = true, length = 11, name = "cpf")
@@ -27,7 +26,7 @@ public class Employee implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "task_ids")
-    private ArrayList<Task> tasks;
+    private List<Task> tasks;
 
     public Long getId() {
         return id;
@@ -61,7 +60,7 @@ public class Employee implements Serializable {
         this.department = department;
     }
 
-    public ArrayList<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 

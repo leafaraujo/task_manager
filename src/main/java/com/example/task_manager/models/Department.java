@@ -1,9 +1,9 @@
 package com.example.task_manager.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import com.example.task_manager.models.Employee;
 
@@ -15,10 +15,7 @@ public class Department implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private int priority;
-
-    @Column(nullable = false, name = "name")
+    @Column(nullable = false, name = "name", unique = true, length = 20)
     private String departmentName;
 
     @Column(nullable = false)
@@ -30,16 +27,19 @@ public class Department implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "employee_ids")
-    private ArrayList <Employee> employee;
+    private List <Employee> employee;
 
     @OneToMany
     @JoinColumn(name = "category_ids")
-    private ArrayList <Category> category;
+    private List<Category> category;
+
+    @OneToMany
+    @JoinColumn(name = "task_ids")
+    private List<Task> task;
 
     public Long getId() {
         return id;
     }
-
 
 
     public void setId(Long id) {
@@ -60,6 +60,14 @@ public class Department implements Serializable {
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     @Override
